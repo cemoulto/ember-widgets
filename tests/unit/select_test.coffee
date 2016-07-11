@@ -344,3 +344,14 @@ test 'optionValuePath with nested valuePath', ->
 
   equal obj2, select.get('selection'),
     'The right selection is retrieved'
+
+test 'shouldEnsureVisible controls whether to ensure visibility', ->
+  expect 0
+
+  select = @subject
+    content: ['foo']
+    shouldEnsureVisible: no
+    ensureVisible: ->
+      ok no, 'ensureVisible is not called if shouldEnsureVisible is false'
+
+  select.set 'highlighted', 'foo'

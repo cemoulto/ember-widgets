@@ -33,7 +33,7 @@ module.exports = (grunt) ->
         singleRun: true
       unit:
         configFile: 'karma.conf.js'
-        singleRun: false
+        singleRun: true
         exclude: ['build/src/ember_widgets.js', 'build/tests/functional/*.js', 'build/tests/integration/*.js'],
       functional:
         configFile: 'karma.conf.js'
