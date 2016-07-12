@@ -346,14 +346,20 @@ test 'optionValuePath with nested valuePath', ->
     'The right selection is retrieved'
 
 test 'shouldEnsureVisible controls whether to ensure visibility', ->
-  expect 1
+  expect 2
 
   select = @subject
     content: ['foo']
+    ensureVisible: ->
+      ok yes, 'ensureVisible is called if shouldEnsureVisible is true'
+  select.set 'highlighted', 'foo'
+
+  select = @subject
+    content: ['bar']
     shouldEnsureVisible: no
 
   spy = sinon.spy select, 'ensureVisible'
-  select.set 'highlighted', 'foo'
-
-  andThen ->
-    equal spy.callCount, 0, 'ensureVisible is not called'
+  select.set 'highlighted', 'bar'
+  equal spy.callCount, 0,
+    'ensureVisible is not called if shouldEnsureVisible is false'
+  spy.restore()
